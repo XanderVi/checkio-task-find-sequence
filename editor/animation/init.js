@@ -75,16 +75,9 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
                 $content.find('.call').html('Pass: checkio(' + JSON.stringify(checkioInput) + ')');
                 $content.find('.answer').remove();
             }
-            //Dont change the code before it
 
-            //Your code here about test explanation animation
-            //$content.find(".explanation").html("Something text for example");
-            //
-            //
-            //
-            //
-            //
-
+            var canvas = new FindSequenceCanvas();
+            canvas.createCanvas($content.find(".explanation")[0], checkioInput, explanation);
 
             this_e.setAnimationHeight($content.height() + 60);
 
@@ -108,10 +101,88 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
         var colorGrey1 = "#EBEDED";
 
         var colorWhite = "#FFFFFF";
-        //Your Additional functions or objects inside scope
-        //
-        //
-        //
+
+        function FindSequenceCanvas() {
+            var zx = 20;
+            var zy = 20;
+            var cellSize = 30;
+            var cellN
+            var fullSize;
+
+            var colorDark = "#294270";
+            var colorOrange = "#F0801A";
+            var colorBlue = "#6BA3CF";
+            var colorLightBlue = "#69B3E3";
+            var colorWhite = "#FFFFFF";
+
+            var attrRect = {"stroke": colorDark, "stroke-width": 2, "fill": colorWhite, "fill-opacity": 0};
+            var attrText = {"font-family": "Verdana", "font-size": 24, "stroke": colorDark};
+            var attrTextMark = {"font-family": "Verdana", "font-size": 24, "stroke": colorOrange, "fill": colorOrange};
+
+            var paper;
+            var rectSet;
+            var numberSet;
+            var matrix = [];
+            var maxN = 6;
+
+            this.createCanvas = function(dom, dataInput, explInput) {
+                cellN = dataInput.length;
+                fullSize = zx * 2 + cellN * cellSize;
+                paper = Raphael(dom, fullSize, fullSize, 0, 0);
+                rectSet = paper.set();
+                numberSet = paper.set();
+                for (var i = 0; i < dataInput.length; i++) {
+                    var row = [];
+                    for (var j = 0; j < dataInput[0].length; j++) {
+                        row.push(dataInput[i][j]);
+                        numberSet.push(
+                            paper.text(j * cellSize + cellSize / 2 + zx,
+                                i * cellSize + cellSize / 2 + zx,
+                                dataInput[i][j]
+                            ).attr(attrText)
+                        );
+                        var r = paper.rect(j * cellSize + zx,
+                            i * cellSize + zx,
+                            cellSize, cellSize
+                        ).attr(attrRect);
+                        r.mark = i * cellN + j;
+                        rectSet.push(r);
+                    }
+                    matrix.push(row);
+                }
+                for (i = 0; i < explInput.length; i++) {
+                    numberSet[explInput[i][0] * cellN + explInput[i][1]].attr(attrTextMark);
+                }
+
+            };
+
+            this.createFeedback = function(N) {
+                maxN = N;
+                rectSet.click(
+                    function(e) {
+                        var mark = this.mark;
+                        var number = parseInt(numberSet[mark].attr("text"));
+                        number = (number == maxN - 1) ? maxN : ((number + 1) % maxN);
+                        numberSet[mark].attr("text", String(number));
+                        matrix[Math.floor(mark / cellN)][mark % cellN] = number;
+
+                    }
+                );
+            };
+
+            this.shuffle = function() {
+                for (var i = 0; i < matrix.length; i++) {
+                    for (var j = 0; j < matrix[0].length; j++) {
+                        matrix[i][j] = Math.floor(Math.random() * maxN) + 1;
+                        numberSet[i * cellN + j].attr("text", String(matrix[i][j]));
+                    }
+                }
+            };
+
+            this.getMatrix = function() {
+                return matrix;
+            };
+        }
 
 
     }
