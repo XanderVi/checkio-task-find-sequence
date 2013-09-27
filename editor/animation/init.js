@@ -83,6 +83,44 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
 
         });
 
+        var $tryit;
+//
+        ext.set_console_process_ret(function (this_e, ret) {
+            $tryit.find(".checkio-result-in").html(ret);
+        });
+
+        ext.set_generate_animation_panel(function (this_e) {
+
+            $tryit = $(this_e.setHtmlTryIt(ext.get_template('tryit')));
+
+            var m = [
+                [1, 2, 3, 4, 5, 6],
+                [1, 2, 2, 4, 5, 6],
+                [1, 3, 4, 5, 5, 6],
+                [4, 5, 6, 1, 2, 3],
+                [1, 4, 2, 3, 1, 6],
+                [1, 2, 3, 4, 5, 6]
+            ];
+
+            var tcanvas = new FindSequenceCanvas();
+
+            tcanvas.createCanvas($tryit.find(".tryit-canvas")[0], m, []);
+            tcanvas.createFeedback(6);
+
+
+            $tryit.find('.bn-check').click(function (e) {
+                var data = tcanvas.getMatrix();
+                this_e.sendToConsoleCheckiO(data);
+                e.stopPropagation();
+                return false;
+            });
+            $tryit.find('.bn-shuffle').click(function (e) {
+                tcanvas.shuffle();
+                return false;
+            });
+
+        });
+
        
 
         var colorOrange4 = "#F0801A";
