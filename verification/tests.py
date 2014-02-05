@@ -7,7 +7,6 @@ Each test is dict with
     "explanation" -- not necessary key, it's using for additional info in animation.
 """
 
-
 TESTS = {
     "Basics": [
         {
@@ -259,6 +258,20 @@ TESTS = {
             "answer": False,
             "explanation": []
         },
+        {
+            "input": [[1, 5, 4, 4, 3],
+                      [2, 2, 4, 1, 5],
+                      [1, 4, 3, 5, 4],
+                      [4, 3, 3, 2, 5]],
+            "answer": True,
+            "explanation": [
+                [0, 3],
+                [1, 2],
+                [2, 1],
+                [3, 0],
+            ]
+        },
+
         {
             "input": [
                 [2, 8, 4, 9, 4, 8, 8, 7],
