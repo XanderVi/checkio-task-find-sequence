@@ -25,9 +25,9 @@
 </div>
 
 <p>
-    You are given a matrix of NxN (4&lt;=N&lt;=10). You should check if there is a
-    sequence of 4 or more matching numbers. The sequence may be positioned
-    horizontally, vertically or diagonally.
+    You are given a matrix of NxN (4&le;N&le;10).
+    You should check if there is a sequence of 4 or more matching digits.
+    The sequence may be positioned horizontally, vertically or diagonally (NW-SE and NE-SW diagonals).
 </p>
 <img class="for_info_only"
      title="find-sequence"
@@ -42,7 +42,7 @@
 
 <p class="p1"><strong>Input: </strong>A list of lists. Each list contains integers.</p>
 
-<p class="p1"><strong>Output: </strong>A boolean. Wether or not a sequence exists.</p>
+<p class="p1"><strong>Output: </strong>A boolean. Whether or not a sequence exists.</p>
 
 <div class="for_info_only">
     <p class="p1"><strong>Example:</strong></p>
@@ -78,5 +78,13 @@ checkio([
 
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    It can be useful for some game algorithms.
+    It's useful for some games where you should detect various line of the same elements (match 3 games for example).
+    This algorithm can be used for the pattern recognition.
+
+
+</p>
+
+<p>
+    <strong>Precondition:</strong> 0&le;N&le;10<br>
+    &forall; x ∈ matrix : 0 &lt; x &lt; 10
 </p>
