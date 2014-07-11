@@ -2,8 +2,8 @@ def checkio(matrix):
     #replace this for solution
     return True or False
 
-#These "asserts" using only for self-checking and not necessary for auto-testing
 if __name__ == '__main__':
+    #These "asserts" using only for self-checking and not necessary for auto-testing
     assert checkio([
         [1, 2, 1, 1],
         [1, 1, 4, 1],

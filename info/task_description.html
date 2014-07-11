@@ -8,7 +8,9 @@
     <p>“Where did you get-”</p>
 
     <p>“Don’t ask questions. Just dig!” She hopped on the shovel and began digging furiously.</p>
-    CLUNK</p>
+
+    <p>CLUNK</p>
+
     <p>“Hey we hit something.” Stephen exclaimed in surprise.</p>
 
     <p>“It’s the treasure!” Sofia was jumping up and down in excitement.</p>
@@ -40,12 +42,12 @@
      alt="find-sequence"
      width="380px"/>
 
-<p class="p1"><strong>Input: </strong>A list of lists. Each list contains integers.</p>
+<p><strong>Input: </strong> A matrix as a list of lists with integers.</p>
 
-<p class="p1"><strong>Output: </strong>A boolean. Whether or not a sequence exists.</p>
+<p><strong>Output: </strong>Whether or not a sequence exists as a boolean.</p>
 
 <div class="for_info_only">
-    <p class="p1"><strong>Example:</strong></p>
+    <p><strong>Example:</strong></p>
 <pre class="brush: python">checkio([
     [1, 2, 1, 1],
     [1, 1, 4, 1],
@@ -78,11 +80,13 @@ checkio([
 
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    This concept is useful for games where you need to detect various lines of the same elements (match 3 games for example).
+    This concept is useful for games where you need to detect various lines of the same elements (match 3 games for
+    example).
     This algorithm can be used for basic pattern recognition.
 </p>
 
 <p>
-    <strong>Precondition:</strong> 0&le;N&le;10<br>
-    &forall; x ∈ matrix : 0 &lt; x &lt; 10
+    <strong>Precondition:</strong><br>
+    0 &le; len(matrix) &le; 10<br>
+    all(all(0 &lt; x &lt; 10 for x in row) for row in matrix)
 </p>
